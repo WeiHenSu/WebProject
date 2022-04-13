@@ -138,18 +138,7 @@ footer {
 }
 
 
-.btn-cart{
-    position: relative;
-    background-color: transparent;
-  }
-.btn-cart:hover{
-    cursor: pointer;
-  }
-.btn-cart .badge{
-    position: absolute;
-    top: 0;
-    right:0;
-}
+
 
 .item_header{
     display: flex;
@@ -183,3 +172,17 @@ footer {
     margin-left: 100px;
     margin-top: 20px;
 } 
+
+
+.btn-cart{
+    position: relative;
+    background-color: transparent;
+  }
+.btn-cart:hover{
+    cursor: pointer;
+  }
+.btn-cart .badge{
+    position: absolute;
+    top: 0;
+    right:0;
+}

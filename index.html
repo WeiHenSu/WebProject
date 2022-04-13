@@ -11,186 +11,190 @@
     <title>WebProject</title>
     </head>
     <body>
+        <div id="app">
+            <header>
+                <div class="container" >
+                    <nav class="navbar navbar fixed-top navbar-expand-lg navbar-light bg-muted ">
+                        <div class="container-fluid ">
+                            <div class="collapse navbar-collapse d-flex flex-row-reverse" >
+                                <div class="d-flex flex-row">
+                                    <div class="p-1 m-2">
+                                        <a class="fbicon" href="https://www.facebook.com/wangpeng2014">
+                                            <img src="./picture/fb.png">
+                                        </a>
+                                    </div>
+                                    <div class="p-1 m-2">
+                                        <a class="igicon" href="https://www.instagram.com/pipmimim/">
+                                            <img src="./picture/Ig.png">
+                                        </a>
+                                    </div>
+                                    <div class="p-1" >
+                                        <button class="btn btn-cart"  data-toggle="modal" data-target="#exampleModal">
+                                            <img src="./picture/shop.png">
+                                            <span class="badge badge-pill badge-danger">{{countbadge}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </header>
 
-        <header>
-            <div class="container" >
-                <nav class="navbar navbar fixed-top navbar-expand-lg navbar-light bg-muted ">
-                    <div class="container-fluid ">
-                        <div class="collapse navbar-collapse d-flex flex-row-reverse" >
-                            <div class="d-flex flex-row">
-                                <div class="p-1 m-2">
-                                    <a class="fbicon" href="https://www.facebook.com/wangpeng2014">
-                                        <img src="./picture/fb.png">
-                                    </a>
+
+
+            
+            <div class="container">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">購物清單</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="item_header">
+                                <div></div>
+                                <div class="item_detail">商品</div>
+                                <div class="price">單價</div>
+                                <div class="count">數量</div> 
+                                <div class="amount">總計</div>
+                            </div>
+                            <div class="item_container" v-for="(cart, index) in cartlist" >
+                                <div class="item_header item_body">
+                                    <div class="operate">
+                                        <button class="btn btn-muted" @click="handledelete(cart, index)"><i class="fas fa-trash-alt"></i></button>
+                                    </div>
+                                    <div class="item_detail">
+                                        <img v-bind:src="cart.pimgurl" alt="">
+                                        <div class="name">{{cart.pname}}</div>
+                                    </div>
+                                    <div class="price"><span>$</span>{{cart.pprice}}</div>
+                                    <div class="count">
+                                        <button class="btn btn-primary" @click="handleSub(cart)">-</button>
+                                        {{cart.pcount}}
+                                        <button class="btn btn-primary" @click="handlePlus(cart)">+</button>
+                                    </div> 
+                                    <div class="amount">{{cart.pprice * cart.pcount}}</div>
+                                    
                                 </div>
-                                <div class="p-1 m-2">
-                                    <a class="igicon" href="https://www.instagram.com/pipmimim/">
-                                        <img src="./picture/Ig.png">
-                                    </a>
-                                </div>
-                                <div class="dropdown ml-auto">
-                                    <a class="btn btn-cart" data-toggle="dropdown">
-                                        <img src="./picture/shop.png">
-                                        <span class="badge badge-pill badge-danger">1</span>
-                                    </a>
-                                    </button>
-                                    <div id="app">
-                                        <div class="container">
-                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuReference" style="min-width:400px;">
-                                                <div class="px-4 py-3">
-                                                    <div class="item_header">
-                                                        <div></div>
-                                                        <div class="item_detail">商品</div>
-                                                        <div class="price">單價</div>
-                                                        <div class="count">數量</div> 
-                                                        <div class="amount">總計</div>
-                                                    </div>
-                                                </div>
-                                                <div class="item_container" v-for="(item, index) in itemList" :key="item.id" >
-                                                    <div class="item_header item_body">
-                                                        <div class="operate">
-                                                            <button class="btn btn-muted" @click="handledelete(index)"><i class="fas fa-trash-alt"></i></button>
-                                                        </div>
-                                                        <div class="item_detail">
-                                                            <img v-bind:src="item.imgUrl" alt="">
-                                                            <div class="name">{{item.itemName}}</div>
-                                                        </div>
-                                                        <div class="price"><span>$</span>{{item.price}}</div>
-                                                        <div class="count">
-                                                            <button class="btn btn-primary" @click="handleSub(item)">-</button>
-                                                            {{item.count}}
-                                                            <button class="btn btn-primary" @click="handlePlus(item)">+</button>
-                                                        </div> 
-                                                        <div class="amount">{{item.price * item.count}}</div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            <a href="#" class="btn btn-primary btn-block"> 結帳去</a>
-                                        </div>  
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-primary btn-block"> 結帳去</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <section id="intro">
+                <div class="jumbotron">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                            <!-- <h1>可放大標</h1> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section id="second">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>全部商品</h3>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col-md-4" v-for="(item, index) in itemList">
+                                <div class="outer">
+                                    <div class="upper">
+                                        <img v-bind:src="item.imgUrl" alt="" >
+                                        <div class="innertext">
+                                            <h4>NTD: {{item.price}}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="lower">
+                                        <h3>{{item.itemName}}</h3>
+                                        <span><i class="fa-solid fa-basket-shopping"></i>{{item.itemintro}}</span>
+                                    </div>
+                                    <div class="text-right">
+                                        <button class="btn" @click="handlecart(item);badge()"><i class="fa-solid fa-cart-arrow-down"></i>加入購物車</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </nav>
-            </div>
-        </header>
+                
+                        <!-- <div class="col-md-4">
+                            <div class="outer">
+                                <div class="upper">
+                                    <img src="./picture/cat.jpg" >
+                                    <div class="innertext">
+                                        <h4></i>$180/張</h4>
+                                    </div>
+                                </div>
+                                <div class="lower">
+                                    <h3>「 一碗小貓 」</h3>
+                                    <span><i class="fa-solid fa-basket-shopping"></i>手繪明信片</span>
+                                </div>
+                                <div class="text-right">
+                                    <a class="btn text-primary" href="#" role="button"><i class="fa-solid fa-cart-arrow-down"></i>加入購物車</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="outer">
+                                <div class="upper">
+                                    <img src="./picture/sticker.jpg" >
+                                    <div class="innertext">
+                                        <h4></i>$50/張</h4>
+                                    </div>
+                                </div>
+                                <div class="lower">
+                                    <h3>「 手繪貼紙 」</h3>
+                                    <span><i class="fa-solid fa-basket-shopping"></i>防水手繪貼紙組</span>
+                                </div>
+                                <div class="text-right">
+                                    <a class="btn text-primary" href="#" role="button"><i class="fa-solid fa-cart-arrow-down"></i>加入購物車</a>
+                                </div>
+                            </div>
+                        </div> -->
 
-        
+            </section>
 
-
-
-        
-
-
-
-
-
-
-
-
-
-        <section id="intro">
-            <div class="jumbotron">
-                <div class="container">
+            <section id="email">
+                <div class="container">   
                     <div class="row">
-                        <div class="col-md-12">
-                           <!-- <h1>可放大標</h1> -->
+                        <div class="col-md-8 offset-md-2 text-center">
+                            <h3>持續追蹤我的作品</h3>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="second">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>全部商品</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="outer">
-                            <div class="upper">
-                                <img src="./picture/brad.jpeg" >
-                                <div class="innertext">
-                                    <h4></i>中杯: $180 單杯: $200</h4>
-                                </div>
-                            </div>
-                            <div class="lower">
-                                <h3>「 我叫柏瑞德 」</h3>
-                                <span><i class="fa-solid fa-basket-shopping"></i>圍圍巾的小鳥 - 飲料提袋</span>
-                            </div>
-                            <div class="text-right">
-                                <a class="btn text-primary" href="#" role="button"><i class="fa-solid fa-cart-arrow-down"></i>加入購物車</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="outer">
-                            <div class="upper">
-                                <img src="./picture/cat.jpg" >
-                                <div class="innertext">
-                                    <h4></i>$180/張</h4>
-                                </div>
-                            </div>
-                            <div class="lower">
-                                <h3>「 一碗小貓 」</h3>
-                                <span><i class="fa-solid fa-basket-shopping"></i>手繪明信片</span>
-                            </div>
-                            <div class="text-right">
-                                <a class="btn text-primary" href="#" role="button"><i class="fa-solid fa-cart-arrow-down"></i>加入購物車</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="outer">
-                            <div class="upper">
-                                <img src="./picture/sticker.jpg" >
-                                <div class="innertext">
-                                    <h4></i>$50/張</h4>
-                                </div>
-                            </div>
-                            <div class="lower">
-                                <h3>「 手繪貼紙 」</h3>
-                                <span><i class="fa-solid fa-basket-shopping"></i>防水手繪貼紙組</span>
-                            </div>
-                            <div class="text-right">
-                                <a class="btn text-primary" href="#" role="button"><i class="fa-solid fa-cart-arrow-down"></i>加入購物車</a>
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2 text-left">
+                            <p>若有新作品發表，您將會直接收到關於新作品的通知！</p>
+                            <div class="input-group input-group-lg">
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="您的 E-Mail">
+                                <a class="btn btn-primary btn-lg  m-2" href="#" role="button">提交</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="email">
-            <div class="container">   
-                <div class="row">
-                    <div class="col-md-8 offset-md-2 text-center">
-                         <h3>持續追蹤我的作品</h3>
-                    </div>
+            </section>
+            <footer class="navbar-fixed-bottom navbar-light bg-white text-right">
+                <div class="container">
+                    Power by <a href="https://github.com/WeiHenSu">WeiHenSu</a> © 2022
                 </div>
-                <div class="row">
-                    <div class="col-md-8 offset-md-2 text-left">
-                        <p>若有新作品發表，您將會直接收到關於新作品的通知！</p>
-                        <div class="input-group input-group-lg">
-                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="您的 E-Mail">
-                            <a class="btn btn-primary btn-lg  m-2" href="#" role="button">提交</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <footer class="navbar-fixed-bottom navbar-light bg-white text-right">
-            <div class="container">
-                Power by <a href="https://github.com/WeiHenSu">WeiHenSu</a> © 2022
-            </div>
-        </footer>
+            </footer>
+        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
         <script type="text/javascript" src="main.js"></script> 
