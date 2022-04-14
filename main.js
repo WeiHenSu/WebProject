@@ -3,32 +3,7 @@ var app = new Vue({
     el:'#app',
     data:{
         countbadge:1,
-        itemList:[      
-            {
-                id:'1',
-                itemName:'「 我叫柏瑞德 」',
-                itemintro: '圍圍巾的小鳥 - 飲料提袋',
-                imgUrl:'./picture/brad.jpeg',
-                price:180,
-                count:0
-            },
-            {
-                id:'2',
-                itemName:'「 一碗小貓 」',
-                itemintro: '手繪明信片',
-                imgUrl:'./picture/cat.jpg',
-                price:180,
-                count:0
-            },
-            {
-                id:'3',
-                itemName:'「 手繪貼紙 」',
-                itemintro: '防水手繪貼紙組',
-                imgUrl:'./picture/sticker.jpg',
-                price:50,
-                count:0
-            },
-        ],
+        itemList:[],
         cartlist:[],
     },
     methods:{
@@ -62,5 +37,11 @@ var app = new Vue({
         badge(){
             this.countbadge++
         }
+    },
+    mounted(){
+        axios.get('http://localhost:3000/items').then((res) => {
+            this.itemList = res.data
+        })
+
     }
 })
